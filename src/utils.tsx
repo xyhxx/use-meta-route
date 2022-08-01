@@ -33,23 +33,24 @@ export function warningOnce(key: string, cond: boolean, message: string) {
   }
 }
 
-export function renderMatches(
-  matches: RouteMetaMatch[] | null,
-  parentMatches: RouteMatch[] = [],
-  guard?: RouteGuard,
-): ReactElement | null {
+export function renderMatches(options: {
+  matches: RouteMetaMatch[] | null;
+  parentMatches?: RouteMatch[];
+  guard?: RouteGuard;
+}): ReactElement | null {
+  const { matches, guard, parentMatches } = options;
   if (matches === null) return null;
 
   const { Provider } = RouteContext;
 
   return matches.reduceRight((outlet, match, index) => {
-    const el = guard?.(match) ?? null;
+    const el = guard?.(match);
 
     return (
       <Provider
         value={{
           outlet,
-          matches: parentMatches.concat((matches as any[]).slice(0, index + 1)),
+          matches: (parentMatches ?? []).concat((matches as any[]).slice(0, index + 1)),
         }}
       >
         {el ?? match.route.element ?? outlet}

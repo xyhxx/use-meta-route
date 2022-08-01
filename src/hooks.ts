@@ -89,5 +89,5 @@ export function useMetaRoutes(options: {
       }),
     );
 
-  return renderMatches(matchList, parentMatches, guard);
+  return renderMatches({ matches: matchList, parentMatches, guard });
 }
