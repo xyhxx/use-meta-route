@@ -1,6 +1,6 @@
 {
   "name": "use-meta-route",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "rewrite useRoutes of react-router-dom to support route meta and route guard",
   "scripts": {
     "build": "vite build",
